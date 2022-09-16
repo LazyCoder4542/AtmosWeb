@@ -79,8 +79,15 @@ class PageContent {
         this.getCityName(json.coord.lat, json.coord.lon, 1).done((data) => {
             console.log(data.data[0]);
             var json = data.data[0];
-            this.place.innerText = json.name
-            this.place.title = json.name
+            this.place.innerText = this.place.title = (() => {
+                if (json.county) {
+                    return json.county
+                }
+                if (json.neighbourhood) {
+                    return json.neighbourhood
+                }
+                return json.name
+            })()
             this.country.innerText = `${json.region}, ${json.country_code}`
         })
     }
