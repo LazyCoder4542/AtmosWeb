@@ -76,7 +76,15 @@ class PageContent {
         this.pressure.querySelector('.wrapper').querySelector('.value').innerText = pressure;
         this.pressure.querySelector('.wrapper').querySelector('.unit').innerText = pressureUnit;
         this.summaryText.innerText = (json.weather[0].description.charAt(0).toUpperCase() + json.weather[0].description.slice(1)) + '...'
-        this.getCityName(json.coord.lat, json.coord.lon, 1).done((data) => {
+
+        this.getCityName(json.coord.lat, json.coord.lon, 1)
+            .then(resp => {
+                var json = resp[0];
+                this.place.innerText = this.place.title = json.name
+                this.country.innerText = `${json.state}, ${json.country}`
+            })
+        //this.place.innerText = this.place.title = 
+        /*this.getCityName(json.coord.lat, json.coord.lon, 1).done((data) => {
             console.log(data.data[0]);
             var json = data.data[0];
             this.place.innerText = this.place.title = (() => {
@@ -89,7 +97,7 @@ class PageContent {
                 return json.name
             })()
             this.country.innerText = `${json.region}, ${json.country_code}`
-        })
+        })*/
     }
     search() {
         /*$('.search-box #search').on('input', function () {
@@ -122,8 +130,15 @@ class PageContent {
             })
     }
     getCityName(lat, lon, limit) {
+        var req = fetch(`http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=${limit}&appid=${APIKey}`)
+            .then(resp => {
+                return resp.json()
+            })
+        return req
+    }
+    /*getCityName(lat, lon, limit) {
         var req = ($.ajax({
-            url: '//api.positionstack.com/v1/reverse',
+            url: 'https://api.positionstack.com/v1/reverse',
             data: {
                 access_key: '118535dffb665e04f3a4ca4fbb466e90',
                 query: `${lat},${lon}`,
@@ -131,7 +146,7 @@ class PageContent {
             }
         }))
         return req
-    }
+    }*/
 
 }
 const pageContent = new PageContent(document.querySelector('.info'), document.querySelector('.main'));
