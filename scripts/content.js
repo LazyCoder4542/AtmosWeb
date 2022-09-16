@@ -123,7 +123,7 @@ class PageContent {
     }
     getCityName(lat, lon, limit) {
         var req = ($.ajax({
-            url: 'http://api.positionstack.com/v1/reverse',
+            url: '//api.positionstack.com/v1/reverse',
             data: {
                 access_key: '118535dffb665e04f3a4ca4fbb466e90',
                 query: `${lat},${lon}`,
