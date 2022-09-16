@@ -1,0 +1,335 @@
+*
+    margin: 0
+    padding: 0
+    box-sizing: border-box
+:root
+    --clr-primary1: #6F42C1
+    --clr-primary2: #FA8A71
+    --clr-primary3: #FFDD4A
+    --clr-neutral1: #CDC7C1
+    --clr-dark1: #221E1B
+    //--clr-primary1: #FA8A71
+    --ff-head: 'Syncopate'
+    --ff-body: 'Lato', lexend
+/*@media ( prefers-color-scheme: dark )
+    .container
+        *
+            animation: none !important
+html.scroll-paused, body.scroll-paused
+    overflow: hidden
+    position: fixed
+body
+    background-color: var(--clr-dark1)
+    font-family: var(--ff-body)
+    color: var(--clr-neutral1)
+    --page-padding: 1rem
+    overflow-x: hidden
+    //cursor: none
+button, input
+    color: inherit
+    font-family: inherit
+    border: none
+    outline: none
+h1, h2, h3, h4
+    font-weight: lighter
+    font-family: var(--ff-head)
+    letter-spacing: 2px
+h1
+    font-size: 1.5rem
+#matrix
+    z-index: -1
+    position: fixed
+    pointer-events: none
+#site-header
+    padding: 1rem var(--page-padding)
+    display: flex
+    column-gap: 2em
+    align-items: center
+    .icon
+        position: relative
+        svg
+            transform: scale(2)
+            transform-origin: left center
+            color: var(--clr-neutral1)
+        svg:nth-child(2)
+            z-index: -1
+            color: var(--clr-primary2)
+            position: absolute
+            top: 0
+            left: 0
+            translate: -4px -4px
+        svg:nth-child(3)
+            color: var(--clr-primary1)
+            position: absolute
+            top: 0
+            left: 0
+            translate: 4px 4px
+    h1
+        color: var(--clr-primary1)
+        text-transform: uppercase
+.container
+    position: relative
+    width: 100%
+    margin-top: 2.5rem
+    margin-bottom: 6rem
+    section
+        padding: 0 var(--page-padding)
+section.info
+    display: grid
+    grid-template-columns: repeat(2, 1fr)
+    gap: .5rem
+    width: 100%
+    div
+        header
+            width: fit-content
+            h2
+                display: table
+                padding: .3rem .75rem
+                border-radius: 2rem
+                background-color: rgba(205, 199, 193, 60%)
+                color: var(--clr-dark1)
+                font-size: .85rem
+                //font-weight: 400
+        .wrapper
+            margin: 1.5rem 0
+            display: inline-flex
+            //flex-direction: column
+            align-items: center
+            column-gap: .5rem
+            div
+                position: relative
+                //justify-self: stretch
+                height: 40px
+                //overflow: hidden
+                perspective: 100px
+                perspective-origin: left center
+                img
+                    position: relative
+                    max-height: 100%
+                    object-fit: cover
+                    object-position: center center
+                    &:hover
+                        animation-play-state: paused !important
+            p
+                display: flex
+                flex-direction: column
+                align-items: center
+                font-size: 3rem
+                line-height: 35px
+                span.unit
+                    font-weight: lighter
+                    font-size: 60%
+    div#temperature
+        header
+            display: flex
+            flex-direction: column
+            gap: .2rem
+            .convert-temp
+                color: var(--clr-primary3)
+                display: none
+                //display: flex
+                align-items: center
+                column-gap: .3rem
+                *
+                    flex-shrink: 0
+                    flex-grow: 0
+                span
+                    font-weight: lighter
+                .switch
+                    box-sizing: content-box
+                    border-radius: 25% 25% 25% 25% / 50% 50% 50% 50%
+                    width: 2rem
+                    height: 1rem
+                    border: 1px solid var(--clr-primary3)
+                    display: flex
+                    align-items: stretch
+                    div
+                        width: 1rem
+                        border-radius: 50%
+                        background-color: var(--clr-primary3)
+                    &.left
+                        justify-content: flex-start
+                    &.right
+                        justify-content: flex-end
+
+                /*.switch
+                    border-radius: 25% 25% 25% 25% / 50% 50% 50% 50%
+                    position: relative
+                    width: 2rem
+                    border: 1px solid var(--clr-primary3)
+                    &::after
+                        content: ""
+                        display: block
+                        padding-top: 50%
+                    div
+                        width: 50%
+                        left: 0
+                        top: 0
+                        position: absolute
+                        border-radius: 50%
+                        background-color: var(--clr-primary3)
+                        //transform: translate(.5px, 0px)
+                        &::after
+                            content: ""
+                            display: block
+                            padding-top: 100%
+                    &.left
+                        div
+                            right: auto
+                            left: 0
+                    &.right
+                        div
+                            left: auto
+                            right: 0
+        img
+            animation: one 4000ms infinite
+    div#humidity
+        .wrapper
+            div
+                overflow: hidden
+                img
+                    animation: two 4000ms infinite linear
+    div#wind-speed
+        img
+            animation: three 1000ms 0ms linear infinite
+    div#pressure
+        img
+            transform-origin: center bottom
+            animation: four 2000ms linear infinite
+section.main
+    position: fixed
+    bottom: 0
+    backdrop-filter: blur(2px)
+    background-color: rgba(205, 199, 193, 20%)
+    width: 100%
+    padding:
+        top: 1rem
+        bottom: 1rem
+    .location
+        #name
+            cursor: pointer
+            width: 100%
+            text-overflow: ellipsis
+            white-space: nowrap
+            overflow: hidden
+            font-family: var(--ff-head)
+            color: var(--clr-primary2)
+            font-weight: lighter
+            font-size: 2rem
+        #country
+            font-size: 1rem
+            font-weight: 300
+    .summary
+        .text
+            font-size: .9rem
+            font-weight: 300
+@keyframes one
+    0%, 20%
+        translate: 0
+    30%, 60%
+        translate: 0 -10px
+    100%
+        translate: 0
+@keyframes two
+    0%
+        transform: translateY(50%)
+    80%, 100%
+        transform: translateY(0%)
+@keyframes three
+    0%
+        transform: rotate(0deg)
+    100%
+        transform: rotate(360deg)
+@keyframes four
+    0%, 55%
+        transform: rotate(0deg)
+    60%
+        transform: rotate(-30deg)
+    65%
+        transform: rotate(30deg)
+    70%
+        transform: rotate(-20deg)
+    75%
+        transform: rotate(20deg)
+    80%
+        transform: rotate(-10deg)
+    85%
+        transform: rotate(10deg)
+    90%
+        transform: rotate(5deg)
+    95%, 100%
+        transform: rotate(0deg)
+
+@media screen and ( min-width: 500px )
+    body
+        --page-padding: 2rem
+        font-size: 1.5rem
+    #site-header
+        padding:
+            top: 1.5rem
+            bottom: 1.5rem
+        column-gap: 3rem
+        .icon
+            scale: 1.3
+    .container
+        margin-top: 1rem
+        margin-bottom: 8rem
+    section.info
+        div
+            .wrapper
+                column-gap: 1.5rem
+                div
+                    height: 50px
+                p
+                    flex-direction: row
+                    line-height: normal
+                    span.unit
+                        align-self: flex-end
+                        padding-bottom: 5px
+        div#temperature
+            .wrapper
+                p
+                    span.unit
+                        align-self: flex-start
+@media screen and ( min-width: 768px )
+    body
+        --page-padding: 2.5rem
+    .container
+        margin-bottom: 9rem
+    section.info
+        div
+            header
+                h2
+                    font-size: 1.3rem
+            .wrapper
+                column-gap: 1.5rem
+                div
+                    height: 70px
+                p
+                    column-gap: .5rem
+        div#temperature
+            header
+                width: auto
+                flex-direction: row
+                justify-content: space-between
+                .convert-temp
+                    display: flex
+/* STOPPED HERE */
+@media screen and ( min-width: 1024px )
+    .container
+        margin-bottom: 9rem
+    section.info
+        gap: 3rem 8rem
+        div
+            header
+                h2
+                    font-size: 1.3rem
+            .wrapper
+                column-gap: 1.5rem
+                div
+                    height: 80px
+                p
+                    font-size: 5rem
+                    column-gap: .5rem
+                    span.unit
+                        padding-bottom: 8px

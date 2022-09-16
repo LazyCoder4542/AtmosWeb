@@ -1,0 +1,98 @@
+.slide-menu {
+  z-index: 5;
+}
+.slide-menu .hamburger {
+  position: fixed;
+  right: 0;
+  z-index: 10;
+}
+.slide-menu .hamburger div {
+  position: relative;
+  width: 2.8rem;
+  height: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.slide-menu .hamburger div span {
+  border-radius: 20px;
+  flex-grow: 0;
+  flex-shrink: 0;
+  display: block;
+  position: relative;
+  background-color: var(--clr-primary2);
+  height: 6px;
+  transition: all 200ms;
+}
+.slide-menu .hamburger div span:nth-child(1) {
+  width: 2.8rem;
+  transform-origin: left top;
+  transition-delay: 200ms;
+}
+.slide-menu .hamburger div span:nth-child(2) {
+  width: 2.4rem;
+}
+.slide-menu .hamburger div span:nth-child(3) {
+  width: 1.6rem;
+  transform-origin: left bottom;
+  transition-delay: 50ms;
+}
+.slide-menu .menu {
+  z-index: 2;
+  transition-property: transform, opacity, visibility;
+  transition-duration: 500ms;
+  transition-timing-function: ease-out;
+  transform: translateX(100%);
+  opacity: 0.5;
+  visibility: hidden;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 80vw;
+  max-width: 500px;
+  height: 100vh;
+  backdrop-filter: blur(5px);
+  background-color: rgba(205, 199, 193, 0.3);
+  padding: 8rem 2rem;
+}
+.slide-menu .menu .search-box {
+  color: var(--clr-dark1);
+  height: 1.5rem;
+  display: flex;
+  outline: 4px solid var(--clr-primary2);
+  background-color: var(--clr-primary2);
+  border-radius: 2px;
+}
+.slide-menu .menu .search-box #search {
+  width: 100%;
+  border: none;
+  outline: none;
+  border-radius: 2px;
+  padding: 0 0.5rem;
+}
+.slide-menu .menu .search-box button {
+  padding: 0 10px;
+  background-color: transparent;
+}
+.slide-menu.open .hamburger div {
+  height: 2.3rem;
+}
+.slide-menu.open .hamburger div span {
+  width: 100%;
+}
+.slide-menu.open .hamburger div span:nth-child(1) {
+  transform: rotate(45deg);
+}
+.slide-menu.open .hamburger div span:nth-child(2) {
+  opacity: 0;
+  transform: translateX(-100%);
+}
+.slide-menu.open .hamburger div span:nth-child(3) {
+  transform: rotate(-45deg);
+}
+.slide-menu.open .menu {
+  visibility: visible;
+  transform: translateX(0);
+  opacity: 1;
+}

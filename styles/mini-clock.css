@@ -1,0 +1,14 @@
+#timer {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    pointer-events: none;
+    user-select: none;
+    padding: .2rem .5rem;
+    background-color: var(--clr-primary1);
+    color: var(--clr-dark1);
+    font-size: .9rem;
+    border-radius: 20px;
+    margin: 1rem var(--page-padding);
+    display: inline-flex;
+}
