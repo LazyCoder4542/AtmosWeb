@@ -55,16 +55,60 @@ class PageContent {
         this.country = main.querySelector('#country')
         this.summaryText = main.querySelector('.text')
         this.summaryIcon = main.querySelector('.sum-icon')
+        this.switchValue = this.temperature.querySelector('.convert-temp').querySelector('.switch').ariaCurrent
+        this.temperatureVal = parseInt(this.temperature.querySelector('.wrapper').querySelector('.value').innerText)
     }
     initialize() {
+        this.tempSwitch()
         this.search()
     }
+    tempSwitch() {
+        var switchs = $('.convert-temp .switch');
+        if ($(switchs).get(0).ariaCurrent == 'fahrenheit') {
+            $(switchs).addClass('right')
+        }
+        else {
+            $(switchs).get(0).ariaCurrent = 'celsius'
+            $(switchs).addClass('left')
+        }
+        $(switchs).click(e => {
+            if ($(switchs).get(0).ariaCurrent == 'fahrenheit') {
+                $(switchs).get(0).ariaCurrent = 'celsius'
+                $(switchs).addClass('left')
+                $(switchs).removeClass('right')
+            }
+            else if ($(switchs).get(0).ariaCurrent == 'celsius') {
+                $(switchs).get(0).ariaCurrent = 'fahrenheit'
+                $(switchs).addClass('right')
+                $(switchs).removeClass('left')
+            }
+            this.switchValue = $(switchs).get(0).ariaCurrent
+            this.switchUnit('temperature')
+
+        });
+    }
+    switchUnit(which) {
+        if (which == 'temperature') {
+            var unit;
+            var temperature;
+            if (this.switchValue == 'fahrenheit') {
+                temperature = Math.round(this.temperatureVal * (9 / 5))
+                unit = '°F'
+            }
+            else {
+                temperature = this.temperatureVal
+                unit = '°C'
+            }
+            this.temperature.querySelector('.wrapper').querySelector('.value').innerText = temperature
+            this.temperature.querySelector('.wrapper').querySelector('.unit').innerText = unit
+        }
+    }
     displayDOM(json) {
+        this.temperatureVal = parseInt(json.main.temp) - 273
         console.log(json);
-        const switchValue = this.temperature.querySelector('.convert-temp').querySelector('.switch').ariaCurrent;
-        var temperatureUnit = switchValue == 'kelvin' ? '°K' : '°C';
+        var temperatureUnit = this.switchValue == 'fahrenheit' ? '°F' : '°C';
         var humidityUnit = '%', windSpeedUnit = 'mph', pressureUnit = 'mb';
-        var temperature = switchValue == 'kelvin' ? Math.round(parseInt(json.main.temp)) : Math.round(parseInt(json.main.temp)) - 273;
+        var temperature = this.switchValue == 'fahrenheit' ? Math.round((parseInt(json.main.temp) - 273) * (9 / 5)) : Math.round(parseInt(json.main.temp) - 273);
         var humidity = json.main.humidity, windSpeed = json.wind.speed, pressure = json.main.pressure;
 
         this.temperature.querySelector('.wrapper').querySelector('.value').innerText = temperature;
