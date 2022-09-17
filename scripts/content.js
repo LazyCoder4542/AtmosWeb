@@ -130,7 +130,7 @@ class PageContent {
             })
     }
     getCityName(lat, lon, limit) {
-        var req = fetch(`http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=${limit}&appid=${APIKey}`)
+        var req = fetch(`https://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=${limit}&appid=${APIKey}`)
             .then(resp => {
                 return resp.json()
             })
